@@ -2,7 +2,7 @@ import { DefinedUseInfiniteQueryResult, InfiniteData, useInfiniteQuery } from '@
 import { useMemo } from 'react';
 
 import { ListOfMoviesPayload, ListOfMoviesResponse } from '@domain';
-import { MoviesAPI, MoviesMockAdapter as MoviesAdapter } from '@infrastructure';
+import { MoviesAPI, MoviesAdapter } from '@infrastructure';
 
 export const MoviesKeys = {
   all: ['all'] as const,
