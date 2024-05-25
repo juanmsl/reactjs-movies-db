@@ -1,0 +1,20 @@
+[build]
+  publish = "dist/"
+  command = "yarn build"
+  base = "/"
+
+[build.environment]
+  YARN_FLAGS = "--frozen-lockfile"
+  YARN_VERSION = "1.22.21"
+  NODE_VERSION = "20.11.0"
+
+[[redirects]]
+  from = "https://juanmsl-movies.netlify.app/*"
+  to = "https://movies.juanmsl.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
