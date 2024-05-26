@@ -1,7 +1,14 @@
 import axios, { AxiosInstance } from 'axios';
 
 import { ENV } from '@core/env';
-import { ListOfMoviesPayload, ListOfMoviesResponse, MoviesPort } from '@domain';
+import {
+  GetMovieDetailsPayload,
+  GetMovieDetailsResponse,
+  ListOfMoviesPayload,
+  ListOfMoviesResponse,
+  MovieDetailsEntity,
+  MoviesPort,
+} from '@domain';
 
 export class MoviesAdapter implements MoviesPort {
   private http: AxiosInstance;
@@ -43,6 +50,17 @@ export class MoviesAdapter implements MoviesPort {
 
   async listUpcoming(payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse> {
     const { data } = await this.http.get<ListOfMoviesResponse>('/movie/upcoming', {
+      params: payload,
+    });
+
+    return data;
+  }
+
+  async getMovieDetails(
+    movieId: MovieDetailsEntity['id'],
+    payload: GetMovieDetailsPayload,
+  ): Promise<GetMovieDetailsResponse> {
+    const { data } = await this.http.get<GetMovieDetailsResponse>(`/movie/${movieId}`, {
       params: payload,
     });
 

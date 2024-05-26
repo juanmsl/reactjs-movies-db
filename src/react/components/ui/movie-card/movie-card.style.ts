@@ -6,6 +6,7 @@ export const MovieCardStyle = styled.section`
   border-radius: 10px;
   position: relative;
   cursor: pointer;
+  transition: all 300ms ease;
 
   &::before {
     content: '';
@@ -29,6 +30,7 @@ export const MovieCardStyle = styled.section`
   }
 
   &:hover {
+    //transform: scale(1.1);
     &::before {
       background-position: 100% 100%;
     }
@@ -56,8 +58,6 @@ export const MovieCardStyle = styled.section`
     object-fit: cover;
     display: block;
     border-radius: 9px 9px 0 0;
-    filter: grayscale(100%);
-    transition: all 500ms ease;
   }
 
   .movie-card-content {
@@ -72,11 +72,5 @@ export const MovieCardStyle = styled.section`
     justify-content: space-between;
     gap: 1em;
     align-items: center;
-  }
-
-  &:hover {
-    .backdrop-image {
-      filter: grayscale(0%);
-    }
   }
 `;

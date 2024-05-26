@@ -25,6 +25,7 @@ export const PageTransition = ({ children }: PageTransitionProps) => {
           loading='lazy'
           src='/assets/images/logo.png'
           alt='logo'
+          style={{ width: '200px' }}
           initial={{
             x: -300,
             opacity: 0,
@@ -57,6 +58,7 @@ export const PageTransition = ({ children }: PageTransitionProps) => {
           loading='lazy'
           src='/assets/images/logo.png'
           alt='logo'
+          style={{ width: '200px' }}
           initial={{
             x: 0,
             opacity: 1,

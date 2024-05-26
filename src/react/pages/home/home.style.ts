@@ -6,6 +6,10 @@ export const HomeStyle = styled.main`
   margin: 0 auto;
   padding: 1em;
 
+  @media screen and (min-width: ${props => props.theme.constants.breakpoints.tablet}) {
+    padding: 4em;
+  }
+
   .generators {
     display: grid;
     grid-template-columns: repeat(auto-fit, 280px);
@@ -46,12 +50,16 @@ export const HomeStyle = styled.main`
   }
 
   .category-tabs {
-    display: grid;
-    grid-auto-flow: column;
-    justify-items: center;
-    gap: 4em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em 2em;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
+
+    @media screen and (min-width: ${props => props.theme.constants.breakpoints.tablet}) {
+      justify-content: start;
+      gap: 1em 4em;
+    }
   }
 
   .category-tab {
@@ -61,19 +69,26 @@ export const HomeStyle = styled.main`
     &::before {
       content: '';
       position: absolute;
-      top: 120%;
+      top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      width: 5px;
-      height: 5px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: ${props => props.theme.colors.primary};
       opacity: 0;
+      transition: all 300ms ease;
     }
 
-    &:hover,
-    &.is-open,
-    &:focus {
+    &:hover {
+      &::before {
+        opacity: 0.5;
+        width: 7px;
+        height: 7px;
+      }
+    }
+
+    &.is-open {
       &::before {
         opacity: 1;
       }
@@ -81,7 +96,6 @@ export const HomeStyle = styled.main`
 
     &.is-open {
       color: ${props => props.theme.colors.primary};
-      border-bottom: 1px solid;
     }
   }
 

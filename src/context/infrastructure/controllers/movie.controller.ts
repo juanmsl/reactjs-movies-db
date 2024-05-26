@@ -1,4 +1,29 @@
-import { ListOfMoviesPayload, MoviesPort } from '@domain';
+import {
+  GetMovieDetailsPayload,
+  ListOfMoviesPayload,
+  ListOfMoviesResponse,
+  MovieDetailsEntity,
+  MovieEntity,
+  MoviesPort,
+} from '@domain';
+
+const mapFieldImagesToFullImageURL = <T extends MovieEntity | MovieDetailsEntity>(
+  movie: T,
+  size: string = 'w500',
+): T => ({
+  ...movie,
+  backdrop_path: `https://image.tmdb.org/t/p/${size}${movie.backdrop_path}`,
+  poster_path: `https://image.tmdb.org/t/p/${size}${movie.backdrop_path}`,
+});
+
+const transformListResponse = async (promise: Promise<ListOfMoviesResponse>): Promise<ListOfMoviesResponse> => {
+  const data = await promise;
+
+  return {
+    ...data,
+    results: data.results.map(movie => mapFieldImagesToFullImageURL(movie)),
+  };
+};
 
 export class MoviesAPI implements MoviesPort {
   private adapter: MoviesPort;
@@ -8,18 +33,24 @@ export class MoviesAPI implements MoviesPort {
   }
 
   listNowPlaying(payload: ListOfMoviesPayload) {
-    return this.adapter.listNowPlaying(payload);
+    return transformListResponse(this.adapter.listNowPlaying(payload));
   }
 
   listPopular(payload: ListOfMoviesPayload) {
-    return this.adapter.listPopular(payload);
+    return transformListResponse(this.adapter.listPopular(payload));
   }
 
   listTopRated(payload: ListOfMoviesPayload) {
-    return this.adapter.listTopRated(payload);
+    return transformListResponse(this.adapter.listTopRated(payload));
   }
 
   listUpcoming(payload: ListOfMoviesPayload) {
-    return this.adapter.listUpcoming(payload);
+    return transformListResponse(this.adapter.listUpcoming(payload));
+  }
+
+  async getMovieDetails(movieId: MovieDetailsEntity['id'], payload: GetMovieDetailsPayload) {
+    const data = await this.adapter.getMovieDetails(movieId, payload);
+
+    return mapFieldImagesToFullImageURL(data, 'original');
   }
 }
