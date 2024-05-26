@@ -1,16 +1,20 @@
-export type MovieEntity = {
-  adult: false;
-  backdrop_path: string;
-  genre_ids: Array<number>;
-  id: number;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
-  title: string;
-  video: false;
-  vote_average: number;
-  vote_count: number;
+import { GenreEntity, MovieDetailsEntity } from './movie-details.entity';
+
+export type MovieEntity = Pick<
+  MovieDetailsEntity,
+  | 'adult'
+  | 'backdrop_path'
+  | 'id'
+  | 'original_language'
+  | 'original_title'
+  | 'overview'
+  | 'popularity'
+  | 'poster_path'
+  | 'release_date'
+  | 'title'
+  | 'video'
+  | 'vote_average'
+  | 'vote_count'
+> & {
+  genre_ids: Array<GenreEntity['id']>;
 };

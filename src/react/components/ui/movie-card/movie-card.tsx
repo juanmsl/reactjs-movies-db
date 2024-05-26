@@ -22,7 +22,7 @@ export const MovieCard = ({ data }: MovieCardProps) => {
   return (
     <MovieCardStyle onClick={handleCardClick}>
       <section className='backdrop-image-container'>
-        <Image className='backdrop-image' loading='lazy' src={`https://image.tmdb.org/t/p/w500${backdrop_path}`} />
+        <Image className='backdrop-image' loading='lazy' src={backdrop_path} />
       </section>
       <section className='movie-card-content'>
         <Typography variant='body' weight='bold' nowrap>

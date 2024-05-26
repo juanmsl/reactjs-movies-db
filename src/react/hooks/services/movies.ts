@@ -1,16 +1,26 @@
-import { DefinedUseInfiniteQueryResult, InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
+import {
+  DefinedUseInfiniteQueryResult,
+  InfiniteData,
+  useInfiniteQuery,
+  useQuery,
+  UseQueryResult,
+} from '@tanstack/react-query';
 import { useMemo } from 'react';
 
-import { ListOfMoviesPayload, ListOfMoviesResponse } from '@domain';
-import { MoviesAPI, MoviesAdapter } from '@infrastructure';
+import { GetMovieDetailsResponse, ListOfMoviesPayload, ListOfMoviesResponse, MovieDetailsEntity } from '@domain';
+import { MoviesAPI, MoviesMockAdapter as MoviesAdapter } from '@infrastructure';
 
 export const MoviesKeys = {
   all: ['all'] as const,
 
-  listNowPlaying: () => [...MoviesKeys.all, 'listNowPlaying'] as const,
-  listPopular: () => [...MoviesKeys.all, 'listPopular'] as const,
-  listTopRated: () => [...MoviesKeys.all, 'listTopRated'] as const,
-  listUpcoming: () => [...MoviesKeys.all, 'listUpcoming'] as const,
+  listMoviesAll: () => [...MoviesKeys.all, 'listMovies'] as const,
+  listNowPlaying: () => [...MoviesKeys.listMoviesAll(), 'listNowPlaying'] as const,
+  listPopular: () => [...MoviesKeys.listMoviesAll(), 'listPopular'] as const,
+  listTopRated: () => [...MoviesKeys.listMoviesAll(), 'listTopRated'] as const,
+  listUpcoming: () => [...MoviesKeys.listMoviesAll(), 'listUpcoming'] as const,
+
+  getMovieDetailsAll: () => [...MoviesKeys.all, 'getMovieDetails'] as const,
+  getMovieDetails: (movieId: MovieDetailsEntity['id']) => [...MoviesKeys.getMovieDetailsAll(), movieId] as const,
 };
 
 type InfiniteQueryReturn<T, L> = DefinedUseInfiniteQueryResult<InfiniteData<T>, unknown> & {
@@ -142,4 +152,14 @@ export const useListUpcoming = (
     ...data,
     allPages,
   };
+};
+
+export const useMovieDetails = (
+  movieId: MovieDetailsEntity['id'],
+  payload?: ListOfMoviesPayload,
+): UseQueryResult<GetMovieDetailsResponse> => {
+  return useQuery<GetMovieDetailsResponse>({
+    queryFn: async () => controller.getMovieDetails(movieId, payload),
+    queryKey: MoviesKeys.getMovieDetails(movieId),
+  });
 };

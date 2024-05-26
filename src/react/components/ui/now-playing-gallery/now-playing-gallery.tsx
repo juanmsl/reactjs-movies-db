@@ -5,11 +5,19 @@ import { MovieEntity } from '@domain';
 import { useListNowPlaying } from '@hooks';
 
 export const NowPlayingGallery = () => {
-  const { allPages = [], isPending, isLoading, hasNextPage, fetchNextPage } = useListNowPlaying();
+  const {
+    allPages = [],
+    isPending,
+    isLoading,
+    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useListNowPlaying();
 
   return (
     <InfinityScroll
-      isLoading={isPending || isLoading}
+      isLoading={isPending || isLoading || isFetching || isFetchingNextPage}
       hasNextPage={hasNextPage}
       loadMore={fetchNextPage}
       data={allPages}

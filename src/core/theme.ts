@@ -147,9 +147,9 @@ export const CommonTheme: CommonThemeEntity = {
 export const DarkTheme: PaletteThemeEntity = {
   background: '#24263A',
   text: '#FFFFFF',
-  primary: '#B91345',
+  primary: '#563cc9',
   primaryContrast: '#FFFFFF',
-  secondary: '#161723',
+  secondary: '#180036',
   secondaryContrast: '#FFFFFF',
   tertiary: '#012e64',
   tertiaryContrast: '#FFFFFF',
