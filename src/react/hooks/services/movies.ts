@@ -8,7 +8,7 @@ import {
 import { useMemo } from 'react';
 
 import { GetMovieDetailsResponse, ListOfMoviesPayload, ListOfMoviesResponse, MovieDetailsEntity } from '@domain';
-import { MoviesAPI, MoviesMockAdapter as MoviesAdapter } from '@infrastructure';
+import { MoviesAPI, MoviesAdapter as MoviesAdapter } from '@infrastructure';
 
 export const MoviesKeys = {
   all: ['all'] as const,
