@@ -29,7 +29,7 @@ export const Navbar = () => {
       <section className='section-bottom'>
         <Tooltip position='right' content='Logout'>
           <span className='modal-logout' onClick={logout}>
-            <Icon name='question-mark-close' />
+            <Icon name='door-open' />
           </span>
         </Tooltip>
       </section>

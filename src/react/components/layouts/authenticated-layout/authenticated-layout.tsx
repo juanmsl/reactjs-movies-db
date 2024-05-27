@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import { AuthenticatedLayoutStyle } from './authenticated-layout.style';
 
-import { Footer, Navbar } from '@components/ui';
+import { Navbar } from '@components/ui';
 
 export const AuthenticatedLayout = () => {
   return (
@@ -13,7 +13,6 @@ export const AuthenticatedLayout = () => {
           <Outlet />
         </section>
       </section>
-      <Footer />
     </AuthenticatedLayoutStyle>
   );
 };

@@ -10,4 +10,11 @@ export type ListOfMoviesPayload = Partial<{
   'release_date.lte': string;
 }>;
 
+export enum MoviesList {
+  NOW_PLAYING = 'now_playing',
+  POPULAR = 'popular',
+  TOP_RATED = 'top_rated',
+  UPCOMING = 'upcoming',
+}
+
 export type ListOfMoviesResponse = ApiResponseEntity<MovieEntity>;

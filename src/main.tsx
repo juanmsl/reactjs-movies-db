@@ -8,14 +8,14 @@ import { BrowserRouter } from 'react-router-dom';
 import './styles.scss';
 
 import { LoaderLogo } from '@components/ui';
-import { AuthProvider } from '@contexts';
+import { AuthProvider, MoviesProvider } from '@contexts';
 import { CommonTheme, DarkTheme, LightTheme, ThemeConstants } from '@core/theme';
 import { Router } from '@router';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: Infinity,
+      staleTime: 3600,
     },
   },
 });
@@ -28,9 +28,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Suspense fallback={<LoaderLogo />}>
             <ErrorBoundary fallback={<Typography variant='header1'>Error</Typography>}>
               <AuthProvider>
-                <BrowserRouter>
-                  <Router />
-                </BrowserRouter>
+                <MoviesProvider>
+                  <BrowserRouter>
+                    <Router />
+                  </BrowserRouter>
+                </MoviesProvider>
               </AuthProvider>
             </ErrorBoundary>
           </Suspense>

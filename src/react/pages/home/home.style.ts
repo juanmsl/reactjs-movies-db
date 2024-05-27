@@ -45,8 +45,6 @@ export const HomeStyle = styled.main`
 
   .movies-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3em;
   }
 
   .category-tabs {
@@ -55,48 +53,34 @@ export const HomeStyle = styled.main`
     gap: 1em 2em;
     align-items: center;
     justify-content: center;
-
-    @media screen and (min-width: ${props => props.theme.constants.breakpoints.tablet}) {
-      justify-content: start;
-      gap: 1em 4em;
-    }
   }
 
   .category-tab {
     position: relative;
     cursor: pointer;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: ${props => props.theme.colors.primary};
-      opacity: 0;
-      transition: all 300ms ease;
-    }
+    padding: 0.25em 1em;
+    border-radius: 4em;
+    background: ${props => props.theme.colors.primaryContrast}88;
+    border: 1px solid transparent;
+    transition: all 300ms ease;
 
     &:hover {
-      &::before {
-        opacity: 0.5;
-        width: 7px;
-        height: 7px;
-      }
+      border-color: inherit;
     }
 
     &.is-open {
-      &::before {
-        opacity: 1;
-      }
+      color: ${props => props.theme.colors.primaryContrast};
+      background: ${props => props.theme.colors.primary};
+      border-color: inherit;
     }
+  }
 
-    &.is-open {
-      color: ${props => props.theme.colors.primary};
-    }
+  .genre-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    place-content: start center;
+    align-items: center;
   }
 
   @keyframes pulse {

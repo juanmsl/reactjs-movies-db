@@ -1,15 +1,14 @@
 import {
-  GetMovieDetailsPayload,
   GetMovieDetailsResponse,
+  ListGenreResponse,
   ListOfMoviesPayload,
   ListOfMoviesResponse,
   MovieDetailsEntity,
+  MoviesList,
 } from '@domain';
 
 export interface MoviesPort {
-  listNowPlaying(payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse>;
-  listPopular(payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse>;
-  listTopRated(payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse>;
-  listUpcoming(payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse>;
-  getMovieDetails(movieId: MovieDetailsEntity['id'], payload: GetMovieDetailsPayload): Promise<GetMovieDetailsResponse>;
+  listMovies(category: MoviesList, payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse>;
+  getMovieDetails(movieId: MovieDetailsEntity['id']): Promise<GetMovieDetailsResponse>;
+  listGenres(): Promise<ListGenreResponse>;
 }

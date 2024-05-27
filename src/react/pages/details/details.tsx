@@ -1,14 +1,16 @@
-import { Image, Typography } from '@juanmsl/ui';
-import { useParams } from 'react-router-dom';
+import { Icon, Image, Typography } from '@juanmsl/ui';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { DetailsStyle } from './details.style';
 
-import { LoaderLogo } from '@components/ui';
+import { GenreTag, LoaderLogo } from '@components/ui';
+import { PATHS } from '@core/constants';
 import { useMovieDetails } from '@hooks';
 
 export const Details = () => {
   const { id } = useParams();
-  const { data, isLoading } = useMovieDetails(parseInt(id), {});
+  const navigate = useNavigate();
+  const { data, isLoading } = useMovieDetails(parseInt(id));
 
   if (!data || isLoading) {
     return <LoaderLogo />;
@@ -22,15 +24,19 @@ export const Details = () => {
         <section className='poster-image-container'>
           <Image className='poster-image' src={poster_path} />
         </section>
+        <section className='poster-header-container'>
+          <Typography weight='bold' onClick={() => navigate(PATHS.HOME_URL)} variant='label' className='back-to-home'>
+            <Icon name='arrow-left' />
+            <span>Back to home</span>
+          </Typography>
+        </section>
         <section className='poster-data-container'>
           <Typography className='poster-title' variant='header1'>
             {title}
           </Typography>
           <section className='genre-tags'>
             {genres.map(({ id, name }) => (
-              <Typography key={id} variant='small' weight='bold' className='genre-tag'>
-                {name}
-              </Typography>
+              <GenreTag label={name} key={id} />
             ))}
           </section>
         </section>

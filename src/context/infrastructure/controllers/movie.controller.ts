@@ -1,9 +1,9 @@
 import {
-  GetMovieDetailsPayload,
   ListOfMoviesPayload,
   ListOfMoviesResponse,
   MovieDetailsEntity,
   MovieEntity,
+  MoviesList,
   MoviesPort,
 } from '@domain';
 
@@ -32,25 +32,17 @@ export class MoviesAPI implements MoviesPort {
     this.adapter = adapter;
   }
 
-  listNowPlaying(payload: ListOfMoviesPayload) {
-    return transformListResponse(this.adapter.listNowPlaying(payload));
+  listMovies(category: MoviesList, payload: ListOfMoviesPayload) {
+    return transformListResponse(this.adapter.listMovies(category, payload));
   }
 
-  listPopular(payload: ListOfMoviesPayload) {
-    return transformListResponse(this.adapter.listPopular(payload));
-  }
-
-  listTopRated(payload: ListOfMoviesPayload) {
-    return transformListResponse(this.adapter.listTopRated(payload));
-  }
-
-  listUpcoming(payload: ListOfMoviesPayload) {
-    return transformListResponse(this.adapter.listUpcoming(payload));
-  }
-
-  async getMovieDetails(movieId: MovieDetailsEntity['id'], payload: GetMovieDetailsPayload) {
-    const data = await this.adapter.getMovieDetails(movieId, payload);
+  async getMovieDetails(movieId: MovieDetailsEntity['id']) {
+    const data = await this.adapter.getMovieDetails(movieId);
 
     return mapFieldImagesToFullImageURL(data, 'original');
+  }
+
+  listGenres() {
+    return this.adapter.listGenres();
   }
 }
