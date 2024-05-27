@@ -73,4 +73,22 @@ export const MovieCardStyle = styled.section`
     gap: 1em;
     align-items: center;
   }
+
+  .movie-card-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+  }
+
+  .favorite-action {
+    width: 1.5em;
+    height: 1.5em;
+    display: grid;
+    place-content: center;
+    border-radius: 2em;
+    padding: 0.1em;
+    background: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
+  }
 `;

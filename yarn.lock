@@ -635,10 +635,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@juanmsl/ui@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@juanmsl/ui/-/ui-0.0.12.tgz#7c0daceae0c3e1875eb67ba9509b3bc5dc608e6d"
-  integrity sha512-SCXvDYyL04prBSCirO2ToP/CFm1laJjWgp0AOs7DaryCnRFoyeG0fB2s4Gfa4GIZdBqAofI2xvFoBuj4j+AGAQ==
+"@juanmsl/ui@^0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@juanmsl/ui/-/ui-0.0.19.tgz#12116fa92907f4a7f3ba881faf7e95eb11929ce7"
+  integrity sha512-EhRPx/FrkUxOKyXspgsKw23wIiYwMZyCESU7sBdxmz/uSGosRm1PTOE/7//TS+w3eLXbs00N17J6Kl0S3KLQnA==
   dependencies:
     "@changesets/cli" "^2.27.3"
     "@hookform/resolvers" "^3.1.0"

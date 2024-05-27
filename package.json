@@ -11,7 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@juanmsl/ui": "^0.0.12",
+    "@juanmsl/ui": "^0.0.19",
     "@tanstack/react-query": "^5.37.1",
     "axios": "^1.7.2",
     "framer-motion": "^11.0.3",

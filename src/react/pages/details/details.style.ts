@@ -26,6 +26,36 @@ export const DetailsStyle = styled.main`
     }
   }
 
+  .poster-header-container {
+    display: grid;
+    gap: 1em;
+    padding: 0 1em 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    @media screen and (min-width: ${props => props.theme.constants.breakpoints.tablet}) {
+      padding: 4em 4em 0;
+    }
+  }
+
+  .back-to-home {
+    display: grid;
+    gap: 1em;
+    align-items: center;
+    grid-auto-flow: column;
+    cursor: pointer;
+    padding: 0.25em 1em;
+    border-radius: 4px;
+    background: ${props => props.theme.colors.background}55;
+    border: 1px solid transparent;
+
+    &:hover {
+      border-color: ${props => props.theme.colors.text};
+    }
+  }
+
   .poster-data-container {
     width: 75%;
     display: grid;
@@ -47,21 +77,6 @@ export const DetailsStyle = styled.main`
     gap: 1em;
     place-content: start;
     align-items: center;
-  }
-
-  .genre-tag {
-    padding: 0.25em 1em;
-    border-radius: 2em;
-    background: ${props => props.theme.colors.primaryContrast}CC;
-    color: ${props => props.theme.colors.primary};
-    transition: all 300ms ease;
-    border: 1px solid;
-    user-select: none;
-
-    &:hover {
-      background: ${props => props.theme.colors.primary};
-      color: ${props => props.theme.colors.primaryContrast};
-    }
   }
 
   .poster-image {

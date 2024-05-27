@@ -2,11 +2,12 @@ import axios, { AxiosInstance } from 'axios';
 
 import { ENV } from '@core/env';
 import {
-  GetMovieDetailsPayload,
   GetMovieDetailsResponse,
+  ListGenreResponse,
   ListOfMoviesPayload,
   ListOfMoviesResponse,
   MovieDetailsEntity,
+  MoviesList,
   MoviesPort,
 } from '@domain';
 
@@ -24,45 +25,22 @@ export class MoviesAdapter implements MoviesPort {
     });
   }
 
-  async listNowPlaying(payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse> {
-    const { data } = await this.http.get<ListOfMoviesResponse>('/movie/now_playing', {
+  async listMovies(category: MoviesList, payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse> {
+    const { data } = await this.http.get<ListOfMoviesResponse>(`/movie/${category}`, {
       params: payload,
     });
 
     return data;
   }
 
-  async listPopular(payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse> {
-    const { data } = await this.http.get<ListOfMoviesResponse>('/movie/popular', {
-      params: payload,
-    });
+  async getMovieDetails(movieId: MovieDetailsEntity['id']): Promise<GetMovieDetailsResponse> {
+    const { data } = await this.http.get<GetMovieDetailsResponse>(`/movie/${movieId}`);
 
     return data;
   }
 
-  async listTopRated(payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse> {
-    const { data } = await this.http.get<ListOfMoviesResponse>('/movie/top_rated', {
-      params: payload,
-    });
-
-    return data;
-  }
-
-  async listUpcoming(payload: ListOfMoviesPayload): Promise<ListOfMoviesResponse> {
-    const { data } = await this.http.get<ListOfMoviesResponse>('/movie/upcoming', {
-      params: payload,
-    });
-
-    return data;
-  }
-
-  async getMovieDetails(
-    movieId: MovieDetailsEntity['id'],
-    payload: GetMovieDetailsPayload,
-  ): Promise<GetMovieDetailsResponse> {
-    const { data } = await this.http.get<GetMovieDetailsResponse>(`/movie/${movieId}`, {
-      params: payload,
-    });
+  async listGenres(): Promise<ListGenreResponse> {
+    const { data } = await this.http.get<ListGenreResponse>('/genre/movie/list');
 
     return data;
   }
