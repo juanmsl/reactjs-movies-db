@@ -76,11 +76,15 @@ export const HomeStyle = styled.main`
   }
 
   .genre-tags {
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     gap: 1em;
     place-content: start center;
     align-items: center;
+
+    @media screen and (min-width: ${props => props.theme.constants.breakpoints.tablet}) {
+      display: flex;
+    }
   }
 
   @keyframes pulse {
