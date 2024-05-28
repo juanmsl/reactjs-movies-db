@@ -7,3 +7,4 @@ export * from './movie-details.entity';
 export * from './list-of-movies.service.entity';
 export * from './get-movie-details.service.entity';
 export * from './list-genre.service.entity';
+export * from './search-query.service.entity';

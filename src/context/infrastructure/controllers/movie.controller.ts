@@ -5,6 +5,8 @@ import {
   MovieEntity,
   MoviesList,
   MoviesPort,
+  SearchQueryPayload,
+  SearchQueryResponse,
 } from '@domain';
 
 const mapFieldImagesToFullImageURL = <T extends MovieEntity | MovieDetailsEntity>(
@@ -16,7 +18,9 @@ const mapFieldImagesToFullImageURL = <T extends MovieEntity | MovieDetailsEntity
   poster_path: `https://image.tmdb.org/t/p/${size}${movie.backdrop_path}`,
 });
 
-const transformListResponse = async (promise: Promise<ListOfMoviesResponse>): Promise<ListOfMoviesResponse> => {
+const transformListResponse = async <T extends ListOfMoviesResponse | SearchQueryResponse>(
+  promise: Promise<T>,
+): Promise<T> => {
   const data = await promise;
 
   return {
@@ -44,5 +48,9 @@ export class MoviesAPI implements MoviesPort {
 
   listGenres() {
     return this.adapter.listGenres();
+  }
+
+  searchQuery(payload: SearchQueryPayload) {
+    return transformListResponse(this.adapter.searchQuery(payload));
   }
 }

@@ -9,6 +9,8 @@ import {
   MovieDetailsEntity,
   MoviesList,
   MoviesPort,
+  SearchQueryPayload,
+  SearchQueryResponse,
 } from '@domain';
 
 export class MoviesAdapter implements MoviesPort {
@@ -41,6 +43,14 @@ export class MoviesAdapter implements MoviesPort {
 
   async listGenres(): Promise<ListGenreResponse> {
     const { data } = await this.http.get<ListGenreResponse>('/genre/movie/list');
+
+    return data;
+  }
+
+  async searchQuery(payload: SearchQueryPayload): Promise<SearchQueryResponse> {
+    const { data } = await this.http.get<SearchQueryResponse>('/search/movie', {
+      params: payload,
+    });
 
     return data;
   }

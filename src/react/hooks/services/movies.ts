@@ -14,6 +14,8 @@ import {
   ListOfMoviesResponse,
   MovieDetailsEntity,
   MoviesList,
+  SearchQueryPayload,
+  SearchQueryResponse,
 } from '@domain';
 import { MoviesAPI, MoviesAdapter as MoviesAdapter } from '@infrastructure';
 
@@ -24,6 +26,8 @@ export const MoviesKeys = {
   listAllMovies: () => [...MoviesKeys.listAll(), 'movies'] as const,
   listMovies: (category: MoviesList) => [...MoviesKeys.listAllMovies(), category] as const,
   listAllGenres: () => [...MoviesKeys.listAll(), 'genres'] as const,
+  searchQueryAll: () => [...MoviesKeys.listAll(), 'search-query'] as const,
+  searchQuery: (payload: SearchQueryPayload) => [...MoviesKeys.searchQueryAll(), payload] as const,
 
   getMovieDetailsAll: () => [...MoviesKeys.all, 'getMovieDetails'] as const,
   getMovieDetails: (movieId: MovieDetailsEntity['id']) => [...MoviesKeys.getMovieDetailsAll(), movieId] as const,
@@ -83,4 +87,34 @@ export const useListGenres = (): UseQueryResult<ListGenreResponse> => {
     queryFn: async () => controller.listGenres(),
     queryKey: MoviesKeys.listAllGenres(),
   });
+};
+
+export const useSearchQuery = (
+  payload?: SearchQueryPayload,
+): InfiniteQueryReturn<SearchQueryResponse, SearchQueryResponse['results']> => {
+  const data = useInfiniteQuery<SearchQueryResponse>({
+    queryFn: async params =>
+      controller.searchQuery({
+        ...payload,
+        page: params.pageParam as number,
+      }),
+    getNextPageParam,
+    initialData: undefined,
+    initialPageParam: 1,
+    queryKey: MoviesKeys.searchQuery(payload),
+  });
+
+  const allPages: SearchQueryResponse['results'] = useMemo(
+    () =>
+      (data.data?.pages || []).reduce<SearchQueryResponse['results']>(
+        (prev, page) => (page?.results ? [...prev, ...page.results] : prev),
+        [] as SearchQueryResponse['results'],
+      ),
+    [data.data?.pages],
+  );
+
+  return {
+    ...data,
+    allPages,
+  };
 };
