@@ -13,6 +13,7 @@ export const SearchModalStyle = styled.section`
   max-height: 80dvh;
   overflow: auto;
   align-content: start;
+  z-index: 10;
 
   .search-results {
     height: 100%;
