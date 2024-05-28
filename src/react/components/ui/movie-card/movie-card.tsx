@@ -2,18 +2,18 @@ import { Icon, Image, Tooltip, Typography } from '@juanmsl/ui';
 import { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useMovies } from '../../../contexts/movies-context';
-
 import { MovieCardStyle } from './movie-card.style';
 
+import { useMovies } from '@contexts';
 import { PATHS } from '@core/constants';
 import { MovieEntity } from '@domain';
 
 type MovieCardProps = {
   data: MovieEntity;
+  noFavoriteAction?: boolean;
 };
 
-export const MovieCard = ({ data }: MovieCardProps) => {
+export const MovieCard = ({ data, noFavoriteAction }: MovieCardProps) => {
   const { title, vote_average, backdrop_path, release_date, id } = data;
   const navigate = useNavigate();
   const { favorites = [], addFavorite, removeFavorite } = useMovies();
@@ -39,13 +39,15 @@ export const MovieCard = ({ data }: MovieCardProps) => {
       <section className='backdrop-image-container'>
         <Image className='backdrop-image' loading='lazy' src={backdrop_path} />
       </section>
-      <section className='movie-card-actions'>
-        <Tooltip content={isFavorite ? 'Remove favorite' : 'Add favorite'}>
-          <section className='favorite-action'>
-            <Icon name={isFavorite ? 'star' : 'star-empty'} onClick={toggleFavorite} />
-          </section>
-        </Tooltip>
-      </section>
+      {!noFavoriteAction && (
+        <section className='movie-card-actions'>
+          <Tooltip content={isFavorite ? 'Remove favorite' : 'Add favorite'}>
+            <section className='favorite-action'>
+              <Icon name={isFavorite ? 'star' : 'star-empty'} onClick={toggleFavorite} />
+            </section>
+          </Tooltip>
+        </section>
+      )}
       <section className='movie-card-content'>
         <Typography variant='body' weight='bold' nowrap>
           {title}

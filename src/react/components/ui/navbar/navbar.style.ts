@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const NavbarStyle = styled.nav`
   background: linear-gradient(${props => props.theme.colors.primary}, ${props => props.theme.colors.secondary});
   color: ${props => props.theme.colors.primaryContrast};
-  padding: 10px 10px;
+  padding: 20px 10px;
   display: grid;
   justify-items: center;
   gap: 50px;
@@ -62,14 +62,18 @@ export const NavbarStyle = styled.nav`
     }
   }
 
-  .modal-logout {
+  .modal-logout,
+  .search-option {
     width: 2em;
     height: 2em;
     display: grid;
     place-content: center;
     border-radius: 50%;
-    border: 1px solid;
     cursor: pointer;
+  }
+
+  .modal-logout {
+    border: 1px solid;
 
     &:hover {
       background: ${props => props.theme.colors.primaryContrast};

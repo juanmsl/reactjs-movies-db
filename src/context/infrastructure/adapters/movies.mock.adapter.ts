@@ -6,6 +6,7 @@ import {
   GetMovieDetailsResponse,
   ListGenreResponse,
   ListOfGenresInstance,
+  SearchQueryResponse,
 } from '@domain';
 
 export class MoviesMockAdapter implements MoviesPort {
@@ -41,6 +42,19 @@ export class MoviesMockAdapter implements MoviesPort {
       setTimeout(() => {
         resolve({
           genres: ListOfGenresInstance,
+        });
+      }, MoviesMockAdapter.timeout);
+    });
+  }
+
+  async searchQuery(): Promise<SearchQueryResponse> {
+    return new Promise<SearchQueryResponse>(resolve => {
+      setTimeout(() => {
+        resolve({
+          page: 1,
+          results: ListOfMoviesInstance,
+          total_pages: 1,
+          total_results: ListOfMoviesInstance.length,
         });
       }, MoviesMockAdapter.timeout);
     });

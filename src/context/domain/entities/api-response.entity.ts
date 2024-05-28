@@ -1,8 +1,4 @@
 export type ApiResponseEntity<T> = {
-  dates: {
-    maximum: string;
-    minimum: string;
-  };
   page: number;
   results: Array<T>;
   total_pages: number;

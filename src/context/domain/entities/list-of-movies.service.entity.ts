@@ -17,4 +17,9 @@ export enum MoviesList {
   UPCOMING = 'upcoming',
 }
 
-export type ListOfMoviesResponse = ApiResponseEntity<MovieEntity>;
+export type ListOfMoviesResponse = ApiResponseEntity<MovieEntity> & {
+  dates: {
+    maximum: string;
+    minimum: string;
+  };
+};
