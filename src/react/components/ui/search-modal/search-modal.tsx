@@ -42,14 +42,16 @@ export const SearchModalContent = () => {
       <Typography className='search-message-result' variant='label'>
         Showing {allPages.length} result{allPages.length === 1 ? '' : 's'} of {lastPage?.total_results ?? 0}
       </Typography>
-      <InfinityScroll
-        isLoading={isLoading || isPending || isFetching}
-        hasNextPage={hasNextPage}
-        loadMore={fetchNextPage}
-        data={allPages}
-        className='search-results'
-        renderItem={(item: MovieEntity, key: number) => <MovieCard key={key} data={item} noFavoriteAction />}
-      />
+      <section className='search-results-container'>
+        <InfinityScroll
+          isLoading={isLoading || isPending || isFetching}
+          hasNextPage={hasNextPage}
+          loadMore={fetchNextPage}
+          data={allPages}
+          className='search-results'
+          renderItem={(item: MovieEntity, key: number) => <MovieCard key={key} data={item} noFavoriteAction />}
+        />
+      </section>
     </SearchModalStyle>
   );
 };
