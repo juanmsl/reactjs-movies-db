@@ -19,11 +19,16 @@ export const SearchModalStyle = styled.section`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  .search-results {
+  .search-results-container {
     height: 100%;
     overflow: auto;
     display: grid;
+    gap: 1em;
+  }
+
+  .search-results {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    display: grid;
     gap: 1em;
   }
 
