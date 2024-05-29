@@ -1,5 +1,5 @@
-import { InfinityScroll, Input, OverlayModal, Typography, useDebounce } from '@juanmsl/ui';
-import { useMemo, useState } from 'react';
+import { InfinityScroll, Input, Modal, Typography, useDebounce } from '@juanmsl/ui';
+import { useEffect, useMemo, useState } from 'react';
 
 import { SearchModalStyle } from './search-modal.style';
 
@@ -60,9 +60,13 @@ type SearchModalProps = {
 };
 
 export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
+  useEffect(() => {
+    document.documentElement.style.overflow = isOpen ? 'hidden' : 'auto';
+  }, [isOpen]);
+
   return (
-    <OverlayModal onClose={onClose} isOpen={isOpen} id='search-modal'>
+    <Modal onClick={onClose} isOpen={isOpen} opacity={0.5} zIndex={10} id='search-modal'>
       <SearchModalContent />
-    </OverlayModal>
+    </Modal>
   );
 };

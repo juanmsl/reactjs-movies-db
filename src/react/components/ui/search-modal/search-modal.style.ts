@@ -14,6 +14,10 @@ export const SearchModalStyle = styled.section`
   overflow: auto;
   align-content: start;
   z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   .search-results {
     height: 100%;
